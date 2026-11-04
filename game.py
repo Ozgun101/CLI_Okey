@@ -28,22 +28,22 @@ def init_game():
 
 def main():
     state = init_game()
-    for i in range(len(state.playerhands)):
-        deconstructed_hand = []
-        for num in state.playerhands[i]:
-            deconstructed_hand.append(tiles.tile_name(num))
-        deconstructed_hand.insert((len(deconstructed_hand)//2),"\n")
-        print(state.starter)
-        marker = " ~~" if i == state.starter else ""
-        print(f"                         PLAYER {i + 1}{marker}")
-        output = ""
-        for i in deconstructed_hand:
-            if i == "\n":
-                output += "\n"
-            else:
-                output+=i + " "
-        print(output,"\n")
-    print("\n", "OKEY:", tiles.tile_name(state.okey), state.okey)
+    # for i in range(len(state.playerhands)):
+    #     deconstructed_hand = []
+    #     for num in state.playerhands[i]:
+    #         deconstructed_hand.append(tiles.tile_name(num))
+    #     deconstructed_hand.insert((len(deconstructed_hand)//2),"\n")
+    #     print(state.starter)
+    #     marker = " ~~" if i == state.starter else ""
+    #     print(f"                         PLAYER {i + 1}{marker}")
+    #     output = ""
+    #     for i in deconstructed_hand:
+    #         if i == "\n":
+    #             output += "\n"
+    #         else:
+    #             output+=i + " "
+    #     print(output,"\n")
+    # print("\n", "OKEY:", tiles.tile_name(state.okey), state.okey)
     simulate.simulate(state)
 
 

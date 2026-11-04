@@ -1,4 +1,4 @@
-import bots, tiles
+import bots, tiles,win_check
 import random
 
 def simulate(state):
@@ -7,7 +7,6 @@ def simulate(state):
     discards = []
     while True:
         hand = state.playerhands[player]
-        
         if len(hand) == 14:##Pick up OR Discard
             if not state.deck:
                 break
@@ -17,9 +16,11 @@ def simulate(state):
                 hand.append(last_discard)
             else:
                 hand.append(state.deck.pop())
-        
+                
+        win_check.check_win(hand, state.okey)
         tile = players[player].choose_discard(hand)
         hand.remove(tile)
         discards.append((player, tile))
-        print(f"Player {player + 1}: {hand}")
+        #print(f"Player {player + 1}: {hand}")
         player = (player + 1) % 4
+        

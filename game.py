@@ -1,4 +1,4 @@
-import tiles, random, simulate
+import tiles, random, simulate,win_check
 from dataclasses import dataclass
 
 @dataclass
@@ -34,7 +34,8 @@ def main():
             deconstructed_hand.append(tiles.tile_name(num))
         deconstructed_hand.insert((len(deconstructed_hand)//2),"\n")
         print(state.starter)
-        print("                         PLAYER",(i+1) if (i+1) != state.starter else ("~~")) ##p. if (i) == state.starter "~~" else: 1)
+        marker = " ~~" if i == state.starter else ""
+        print(f"                         PLAYER {i + 1}{marker}")
         output = ""
         for i in deconstructed_hand:
             if i == "\n":
@@ -42,9 +43,7 @@ def main():
             else:
                 output+=i + " "
         print(output,"\n")
-    print("\n", "OKEY:", tiles.tile_name(state.okey))
-
-
+    print("\n", "OKEY:", tiles.tile_name(state.okey), state.okey)
     simulate.simulate(state)
 
 

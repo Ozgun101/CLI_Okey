@@ -1,5 +1,13 @@
-import tiles
-import random
+import tiles, random, simulate
+from dataclasses import dataclass
+
+@dataclass
+class GameState:
+    deck: list
+    playerhands: list
+    starter: int
+    indicator: int
+    okey: int
 
 def init_game():
     deck = tiles.create_tiles()
@@ -13,15 +21,31 @@ def init_game():
         indicatorindex = random.randint(0,48)
     indicator = deck.pop(indicatorindex)
     okey = tiles.get_okey_tile(indicator)
-    return deck, playerhands, starter,indicator, okey
+    return GameState(deck, playerhands, starter, indicator, okey)
+
 
 
 
 def main():
-    deck,playerhands,starter,indicator,okey = init_game()
-    for i in range(len(playerhands)):
-        print("Player ",(i+1),": ",playerhands[i],sep="")
-    print("\n", "OKEY:", tiles.tile_name(okey))
+    state = init_game()
+    for i in range(len(state.playerhands)):
+        deconstructed_hand = []
+        for num in state.playerhands[i]:
+            deconstructed_hand.append(tiles.tile_name(num))
+        deconstructed_hand.insert((len(deconstructed_hand)//2),"\n")
+        print(state.starter)
+        print("                         PLAYER",(i+1) if (i+1) != state.starter else ("~~")) ##p. if (i) == state.starter "~~" else: 1)
+        output = ""
+        for i in deconstructed_hand:
+            if i == "\n":
+                output += "\n"
+            else:
+                output+=i + " "
+        print(output,"\n")
+    print("\n", "OKEY:", tiles.tile_name(state.okey))
+
+
+    simulate.simulate(state)
 
 
 if __name__ == "__main__":

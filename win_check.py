@@ -1,4 +1,3 @@
-import game
 import tiles
 #RULES.
 #TO WIN A GAME, YOU MUST HAVE EXACTLY 14 MELDED TILES
@@ -7,19 +6,25 @@ import tiles
 #GROUPS MUST BE THE SAME NUMBER IN DIFFERENT, UNIQUE COLORS (MAX MELD SIZE OF 4)
 #RUNS ARE CONSECUTIVE NUMBERS IN THE SAME COLOR
 
-def check_win(hand,okey): #TO CHECK WINS, WE DEFINE A 2D MATRIX OF THE PLAYERS HAND, FOR EACH ROW AND COLUMN COMBINATION, THE MELD IS SEPERATED
+def check_win(hand, okey):
     matrix = [[0 for _ in range(13)] for _ in range(4)]
+    wilds = 0
     for tile in hand:
-        if tile == tiles.FAKE_OKEY:
+        if tile == okey:
             wilds += 1
+            continue
+        elif tile == tiles.FAKE_OKEY:  # Fake okeys represent the okey tile
+            matrix[tiles.tile_color(okey)][tiles.tile_number(okey) - 1] += 1
             continue
         tnum = tiles.tile_number(tile)
         tcolor = tiles.tile_color(tile)
         matrix[tcolor][tnum - 1] += 1
-    return(matrix)
+    print(matrix)
+    return matrix
 
 
-
-hand = [10, 35, 34, 45, 29, 33, 37, 49, 3, 33, 28, 42, 16, 10, 17]
-print(check_win(hand,1))
+# [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0]
+# [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+# [0, 0, 1, 1, 0, 0, 0, 2, 1, 1, 0, 1, 0]
+# [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0]
 

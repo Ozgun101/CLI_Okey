@@ -54,3 +54,4 @@ def hand_to_counts(hand):
     for tile in hand:
         counts[tile] += 1
     return counts
+

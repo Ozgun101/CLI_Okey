@@ -19,12 +19,21 @@ def check_win(hand, okey):
         tnum = tiles.tile_number(tile)
         tcolor = tiles.tile_color(tile)
         matrix[tcolor][tnum - 1] += 1
-    print(matrix)
+    print(matrix,wilds)
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            if matrix[i][j] > 0:
+                print("Tile at",(i,j),sep=" ")
+            else:
+                continue
     return matrix
 
 
-# [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0]
-# [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
-# [0, 0, 1, 1, 0, 0, 0, 2, 1, 1, 0, 1, 0]
-# [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0]
+#[1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+#[0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0]
+#[0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1]
+#[0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0]
+
+hand = [0, 1, 2, 3, 9, 16, 20, 24, 29, 32, 38, 42, 47, 49] #okey is 49 ind is 48
+check_win(hand,49)
 
